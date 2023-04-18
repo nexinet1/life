@@ -1,13 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
-<script src="index.js"></script>
-</html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Gateway</title>
+    </head>
+        <body>
+          <h1>Welcome to the Gateway</h1>
+          <p>To access the internet, enter a URL:</p>
+          <form method="get" action="/browse">
+            <input type="text" name="url">
+            <button type="submit">Go</button>
+          </form>
+        </body>
+      </html>
+    `);
+    res.end();
+    return;
+  }
