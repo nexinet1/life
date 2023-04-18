@@ -1,33 +1,24 @@
 const http = require('http');
 const https = require('https');
 const url = require('url');
+const fs = require('fs');
 
 const server = http.createServer((req, res) => {
   const reqUrl = url.parse(req.url);
 
   // If the request is for the gateway page, return it
   if (reqUrl.pathname === '/') {
-    res.writeHead(200, {'Content-Type': 'text/html'});
-    res.write(`
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Gateway</title>
-    </head>
-        <body>
-          <h1>Welcome to the Gateway</h1>
-          <p>To access the internet, enter a URL:</p>
-          <form method="get" action="/browse">
-            <input type="text" name="url">
-            <button type="submit">Go</button>
-          </form>
-        </body>
-      </html>
-    `);
-    res.end();
+    fs.readFile('index.html', 'utf8', (err, html) => {
+      if (err) {
+        res.writeHead(500, {'Content-Type': 'text/plain'});
+        res.write('Error: Internal Server Error');
+        res.end();
+        return;
+      }
+      res.writeHead(200, {'Content-Type': 'text/html'});
+      res.write(html);
+      res.end();
+    });
     return;
   }
 
